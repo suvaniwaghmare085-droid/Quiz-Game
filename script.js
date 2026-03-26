@@ -24,31 +24,47 @@ const answersEl = document.getElementById("answers");
 const nextBtn = document.getElementById("nextBtn");
 const resultDiv = document.getElementById("result");
 const scoreEl = document.getElementById("score");
+const progressEl = document.getElementById("progress");
 
 function loadQuestion() {
+  resetState();
+
   let q = questions[currentQ];
   questionEl.innerText = q.question;
-  answersEl.innerHTML = "";
+  progressEl.innerText = `Question ${currentQ + 1} of ${questions.length}`;
 
   q.answers.forEach((ans, index) => {
-    let btn = document.createElement("button");
+    const btn = document.createElement("button");
     btn.innerText = ans;
-    btn.onclick = () => checkAnswer(index);
+    btn.onclick = () => selectAnswer(btn, index);
     answersEl.appendChild(btn);
   });
 }
 
-function checkAnswer(index) {
-  if (index === questions[currentQ].correct) {
+function resetState() {
+  nextBtn.classList.add("hidden");
+  answersEl.innerHTML = "";
+}
+
+function selectAnswer(button, index) {
+  const correct = questions[currentQ].correct;
+
+  Array.from(answersEl.children).forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct) btn.classList.add("correct");
+  });
+
+  if (index === correct) {
     score++;
+  } else {
+    button.classList.add("wrong");
   }
-  nextBtn.style.display = "block";
+
+  nextBtn.classList.remove("hidden");
 }
 
 nextBtn.onclick = () => {
   currentQ++;
-  nextBtn.style.display = "none";
-
   if (currentQ < questions.length) {
     loadQuestion();
   } else {
