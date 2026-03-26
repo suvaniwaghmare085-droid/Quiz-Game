@@ -1,72 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quiz Game</title>
-  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Quiz Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
- 
-  <div class="stars"></div>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
- 
-  <div class="card">
-    <div class="logo"><div class="logo-dot"></div> Quiz Game</div>
- 
-    <!-- QUIZ -->
-    <div id="quiz">
-      <div class="top-row">
-        <div class="q-counter" id="q-counter">Question 1 of 3</div>
-        <div class="score-chip" id="score-chip">Score: 0</div>
+  <div class="app">
+    <div class="card">
+      <div class="logo">Elite Quiz Game</div>
+
+      <!-- Category Selection -->
+      <div id="category-screen" class="screen">
+        <h2>Select a Category</h2>
+        <div id="category-options"></div>
       </div>
- 
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-      </div>
- 
-      <div class="question slide-in" id="question"></div>
- 
-      <div class="answers" id="answers"></div>
- 
-      <div class="feedback" id="feedback"></div>
- 
-      <button class="btn-next" id="nextBtn">Next Question →</button>
-    </div>
- 
-    <!-- RESULT -->
-    <div id="result">
-      <div class="result-emoji" id="result-emoji">🎉</div>
-      <div class="result-title" id="result-title">Well Done!</div>
-      <div class="result-sub" id="result-sub">You completed the quiz</div>
- 
-      <div class="score-circle" id="score-circle">
-        <div class="score-inner">
-          <div class="score-num" id="score-num">0</div>
-          <div class="score-total" id="score-total">out of 3</div>
+
+      <!-- Quiz -->
+      <div id="quiz-screen" class="screen hidden">
+        <div class="top-row">
+          <div id="timer">⏰ 15s</div>
+          <div id="q-counter">Question 1</div>
+          <div id="score-chip">Score: 0</div>
         </div>
+
+        <div class="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+
+        <h2 id="question"></h2>
+        <div id="answers"></div>
+        <div id="feedback"></div>
+        <button id="nextBtn" class="hidden">Next →</button>
       </div>
- 
-      <div class="stat-row">
-        <span class="stat-label">Correct Answers</span>
-        <span class="stat-val" id="r-correct" style="color:var(--correct)">0</span>
+
+      <!-- Result -->
+      <div id="result-screen" class="screen hidden">
+        <div id="confetti"></div>
+        <h2 id="result-title"></h2>
+        <p id="result-sub"></p>
+        <div id="score-details">
+          <span id="score-num">0</span>/<span id="score-total">0</span>
+        </div>
+        <div id="leaderboard">
+          <h3>Leaderboard</h3>
+          <ul id="leaderboard-list"></ul>
+        </div>
+        <button id="restartBtn">↺ Play Again</button>
       </div>
-      <div class="stat-row">
-        <span class="stat-label">Wrong Answers</span>
-        <span class="stat-val" id="r-wrong" style="color:var(--wrong)">0</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-label">Accuracy</span>
-        <span class="stat-val" id="r-accuracy">0%</span>
-      </div>
- 
-      <button class="btn-play-again" onclick="restartGame()">↺ Play Again</button>
     </div>
   </div>
- 
   <script src="script.js"></script>
 </body>
 </html>
